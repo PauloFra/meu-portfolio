@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import { withContentlayer } from "next-contentlayer";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+module.exports = withContentlayer({
+  reactStrictMode: true,
+  webpack(config) {
+    config.resolve.modules.push(__dirname);
+    return config;
+  },
+});
