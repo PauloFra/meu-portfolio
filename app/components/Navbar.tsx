@@ -22,7 +22,7 @@ export default function Navbar() {
       className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md p-4 flex justify-between items-center z-20"
     >
       <Link href="/" className="text-2xl font-bold text-white">
-        [Seu Nome]
+        Paulo Sergio
       </Link>
       <div className="flex gap-6 items-center">
         <Link href="#projects" className="text-gray-300 hover:text-white">
