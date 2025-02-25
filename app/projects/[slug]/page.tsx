@@ -13,14 +13,14 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">
       <Navbar />
       <section className="pt-20 pb-12 px-4 sm:px-8">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
+        <div className="max-w-4xl mt-5 mx-auto flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative w-32 h-32 flex-shrink-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded  blur-sm"></div>
+            <div className="absolute  inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded  blur-sm"></div>
             <Image
               src="/images/me.jpg"
               alt="Paulo Sergio"
