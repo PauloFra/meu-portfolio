@@ -45,4 +45,4 @@ next-env.d.ts
 .contentlayer
 
 
-/lib/data.ts
+app/lib/data.ts

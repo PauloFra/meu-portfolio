@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "contentlayer": "^0.3.4",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
     "framer-motion": "^12.4.7",
+    "lucide-react": "^0.475.0",
     "next": "15.1.7",
     "next-contentlayer": "^0.3.4",
     "react": "^19.0.0",
