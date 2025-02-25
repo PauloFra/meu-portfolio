@@ -13,14 +13,14 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">
       <Navbar />
       <section className="pt-20 pb-12 px-4 sm:px-8">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
+        <div className="max-w-4xl mt-5 mx-auto flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative w-32 h-32 flex-shrink-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded  blur-sm"></div>
+            <div className="absolute  inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded  blur-sm"></div>
             <Image
               src="/images/me.jpg"
               alt="Paulo Sergio"
@@ -51,14 +51,14 @@ export default function Home() {
                 Sobre Mim
               </h2>
               <p className="mt-2 text-gray-300 dark:text-gray-700 text-base md:text-lg leading-relaxed">
-                Com 3 anos de experiência como pleno e uma mentalidade moldada
-                por 15 anos de paixão por desenvolvimento e UI/UX, eu crio
-                aplicações web que unem funcionalidade e estética. Especialista
-                em React, Next.js, TypeScript e Node.js, minha trajetória inclui
-                desde sistemas inovadores como meu TCC de gerenciamento de vagas
-                até soluções de e-commerce na Usaflex com VTEX IO. Sou movido
-                por colaboração, aprendizado contínuo e pela entrega de projetos
-                escaláveis com um toque de design excepcional.
+                Sou um desenvolvedor pleno com 3 anos de experiência, dedicado a
+                criar aplicações web que combinam funcionalidade e design
+                intuitivo. Especialista em React, Next.js, TypeScript e Node.js,
+                minha trajetória inclui projetos como um sistema inovador de
+                gerenciamento de vagas no meu TCC e soluções de e-commerce na
+                Usaflex com VTEX IO. Sou movido por colaboração, aprendizado
+                contínuo e pela entrega de projetos escaláveis, sempre buscando
+                elevar a experiência do usuário.
               </p>
             </div>
           </motion.div>
