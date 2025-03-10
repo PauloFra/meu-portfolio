@@ -17,13 +17,17 @@ export function usePosts() {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
 
+  const POSTS_PER_PAGE = 5;
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const loadPosts = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${apiUrl}api/posts?page=${page}`);
+        const response = await fetch(
+          `${apiUrl}api/posts?page=${page}&limit=${POSTS_PER_PAGE}`
+        );
         if (!response.ok) {
           throw new Error("Erro na resposta da API");
         }

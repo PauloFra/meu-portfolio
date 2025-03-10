@@ -14,6 +14,24 @@ export function Pagination({
   goToPage,
 }: PaginationProps) {
   if (totalPages <= 1) return null;
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+
+    let startPage = Math.max(1, page - 2);
+    const endPage = Math.min(totalPages, startPage + 4);
+
+    if (endPage === totalPages) {
+      startPage = Math.max(1, endPage - 4);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  };
+
+  const pageNumbers = getPageNumbers();
 
   return (
     <>
@@ -50,7 +68,8 @@ export function Pagination({
         </button>
 
         <div className="flex items-center space-x-1">
-          {page > 3 && (
+          {/* Primeira página e ellipsis */}
+          {!pageNumbers.includes(1) && (
             <>
               <button
                 onClick={() => goToPage(1)}
@@ -58,36 +77,31 @@ export function Pagination({
               >
                 1
               </button>
-              {page > 4 && <span className="px-1 text-gray-500">...</span>}
+              {pageNumbers[0] > 2 && (
+                <span className="px-1 text-gray-500">...</span>
+              )}
             </>
           )}
 
-          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-            let pageNum = Math.max(1, Math.min(totalPages - 4, page - 2) + i);
-            if (totalPages <= 5) {
-              pageNum = i + 1;
-            }
-            if (pageNum <= totalPages) {
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => goToPage(pageNum)}
-                  className={`w-10 h-10 flex items-center justify-center rounded ${
-                    pageNum === page
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-700 hover:bg-gray-600"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            }
-            return null;
-          })}
+          {/* Números de página atual */}
+          {pageNumbers.map((num) => (
+            <button
+              key={num}
+              onClick={() => goToPage(num)}
+              className={`w-10 h-10 flex items-center justify-center rounded ${
+                num === page
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-700 hover:bg-gray-600"
+              }`}
+            >
+              {num}
+            </button>
+          ))}
 
-          {page < totalPages - 2 && (
+          {/* Última página e ellipsis */}
+          {!pageNumbers.includes(totalPages) && (
             <>
-              {page < totalPages - 3 && (
+              {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
                 <span className="px-1 text-gray-500">...</span>
               )}
               <button
