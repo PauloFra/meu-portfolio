@@ -61,11 +61,11 @@ export const skills = [
 ];
 export const experiences = [
   {
-    title: "Pleno Software Engineer",
+    title: "Software Engineer PL",
     company: "DBC Company / Usaflex",
     period: "Março 2022 - Presente",
     description:
-      "Liderança técnica no desenvolvimento da nova plataforma de e-commerce da Usaflex, utilizando VTEX IO, ReactJS e NodeJS. Implementação de novas funcionalidades e integrações dentro do ecossistema OMNI Channel. \n\n" +
+      "Atuo  no desenvolvimento da nova plataforma de e-commerce da Usaflex, utilizando VTEX IO, ReactJS e NodeJS. Implementação de novas funcionalidades e integrações dentro do ecossistema OMNI Channel. \n\n" +
       "Atuação em System Design, Performance Optimization, Requirements Analysis, Prototyping, Risk Management e Documentation. \n\n" +
       "Apoio aos desenvolvedores através de pair programming e code reviews. \n\n" +
       "Liderança de squad focada no desenvolvimento do checkout, incluindo integrações com terceiros e otimizações de performance. \n\n" +
@@ -83,7 +83,7 @@ export const experiences = [
     ],
   },
   {
-    title: "Estagiário de Desenvolvimento Front-End",
+    title: " Desenvolvimento Web",
     company: "DBC Company",
     period: "Fevereiro 2022 - Junho 2022",
     description:
@@ -92,9 +92,31 @@ export const experiences = [
     technologies: ["React.js", "TypeScript", "Redux", "Styled Components"],
   },
   {
+    title: "Software Engineer - Freelancer",
+    company: "Sabemos Tecnologia",
+    period: "Janeiro 2023 - Presente",
+    description:
+      "Desenvolvo soluções completas para plataforma SaaS na Sabemos, implementando arquiteturas escaláveis com Next.js no frontend e Fastify/Bun no backend, garantindo performance e experiência de usuário otimizada.\n\n" +
+      "Construo APIs robustas e seguras utilizando TypeScript, Fastify e Drizzle ORM, implementando autenticação JWT, controle de acesso CASL e integração com PostgreSQL para gerenciamento eficiente de dados.\n\n" +
+      "Desenvolvo interfaces responsivas e intuitivas com React, TailwindCSS e componentes Radix UI, aplicando padrões modernos de desenvolvimento frontend como React Query e React Hook Form para criar experiências de usuário fluidas.\n\n" +
+      "Implemento infraestrutura DevOps com Docker, VM Linux e Nginx, garantindo ambientes de desenvolvimento consistentes, deploy automatizado e alta disponibilidade para aplicações em produção.",
+    technologies: [
+      "React.js",
+      "TypeScript",
+      "Next.js",
+      "Fastify",
+      "Drizzle ORM",
+      "PostgreSQL",
+      "TailwindCSS",
+      "Radix UI",
+      "Docker",
+      "Nginx",
+    ],
+  },
+  {
     title: "Desenvolvedor Freelancer",
     company: "Projetos Autônomos",
-    period: "Junho 2022 - Presente",
+    period: "Janeiro 2022 - Presente",
     description:
       "Atuação como desenvolvedor freelancer, oferecendo serviços de manutenção e desenvolvimento web para empresas e pequenos negócios. \n\n" +
       "Desenvolvimento de landing pages, blogs e aplicações móveis, além de plataformas SaaS utilizando Next.js, React Native, Expo, Node.js e Supabase. \n\n" +

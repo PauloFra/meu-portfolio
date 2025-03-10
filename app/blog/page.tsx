@@ -1,29 +1,22 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-type Post = {
-  title: string;
-  slug: string;
-  excerpt?: string;
-  date?: string;
-};
+import { usePosts } from "../hooks/usePosts";
+import { PostCard } from "../components/PostCard";
+import { Pagination } from "../components/Pagination";
+import { Loading } from "../components/Loading";
+import { LoadingOverlay } from "../components/LoadingOverlay";
+import { ErrorState } from "../components/ErrorState";
+import { EmptyState } from "../components/EmptyState";
+import { Post } from "../types/global";
 
 export default function Blog() {
-  const posts: Post[] = [
-    {
-      title: "Otimização Next.js",
-      slug: "https://private-rosemary-98c.notion.site/Otimiza-o-Next-js-1a5cc42d51b08053a00fc99955b64822?pvs=73",
-      excerpt: "Dicas avançadas para melhorar a performance do Next.js.",
-      date: "24 de Fevereiro, 2025",
-    },
-    {
-      title: "TypeScript Avançado",
-      slug: "https://private-rosemary-98c.notion.site/TypeScript-Next-js-Mastery-1a5cc42d51b080479ae5c8019585195a",
-      excerpt: "Explorando tipos complexos e boas práticas.",
-      date: "20 de Fevereiro, 2025",
-    },
-  ];
+  const { posts, loading, error, page, totalPages, total, goToPage } =
+    usePosts();
+
+  if (loading && page === 1) return <Loading />;
+  if (error) return <ErrorState error={error} retry={() => goToPage(1)} />;
+  if (!posts || posts.length === 0) return <EmptyState />;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 p-8">
@@ -38,37 +31,34 @@ export default function Blog() {
         </h1>
         <p className="text-gray-300 dark:text-gray-700 mb-8">
           Meu espaço para compartilhar conhecimento e experiências.
+          <span className="text-blue-400 dark:text-blue-600 ml-2">
+            {total} posts disponíveis
+          </span>
         </p>
 
+        {/* Loading overlay para mudança de página */}
+        {loading && page > 1 && <LoadingOverlay />}
+
+        {/* Lista de posts */}
         <div className="grid gap-6">
-          {posts.map((post, index) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="p-6 bg-gray-800/50 dark:bg-gray-200/50 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-            >
-              <Link href={`${post.slug}`} className="block" target="_blank">
-                <h2 className="text-2xl font-semibold text-white dark:text-gray-900 hover:text-blue-500 dark:hover:text-blue-600 transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-gray-400 dark:text-gray-600 text-sm mt-1">
-                  {post.date}
-                </p>
-                <p className="text-gray-300 dark:text-gray-700 mt-2">
-                  {post.excerpt}
-                </p>
-              </Link>
-            </motion.div>
-          ))}
+          {Array.isArray(posts) &&
+            posts.map((post: Post, index: number) => (
+              <PostCard key={post.id} post={post} index={index} />
+            ))}
         </div>
+
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          total={total}
+          goToPage={goToPage}
+        />
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="mt-8"
+          className="mt-8 text-center"
         >
           <Link
             href="/"

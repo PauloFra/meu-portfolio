@@ -51,14 +51,14 @@ export default function Home() {
                 Sobre Mim
               </h2>
               <p className="mt-2 text-gray-300 dark:text-gray-700 text-base md:text-lg leading-relaxed">
-                Sou um desenvolvedor pleno com 3 anos de experiência, dedicado a
-                criar aplicações web que combinam funcionalidade e design
-                intuitivo. Especialista em React, Next.js, TypeScript e Node.js,
-                minha trajetória inclui projetos como um sistema inovador de
-                gerenciamento de vagas no meu TCC e soluções de e-commerce na
-                Usaflex com VTEX IO. Sou movido por colaboração, aprendizado
-                contínuo e pela entrega de projetos escaláveis, sempre buscando
-                elevar a experiência do usuário.
+                Sou um desenvolvedor dedicado a criar aplicações web que
+                combinam funcionalidade e design intuitivo. Especialista em
+                React, Next.js, TypeScript e Node.js, minha trajetória inclui
+                projetos como um sistema inovador de gerenciamento de vagas no
+                meu TCC e soluções de e-commerce na Usaflex com VTEX IO. Sou
+                movido por colaboração, aprendizado contínuo e pela entrega de
+                projetos escaláveis, sempre buscando elevar a experiência do
+                usuário.
               </p>
             </div>
           </motion.div>
@@ -100,6 +100,30 @@ export default function Home() {
               className="mt-4 inline-block px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
             >
               Visitar Loja Usaflex
+            </a>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-8 p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
+          >
+            <h3 className="text-xl font-semibold text-white dark:text-gray-900">
+              Sabemos
+            </h3>
+            <p className="text-gray-300 dark:text-gray-700 mt-2">
+              Desenvolvo soluções completas para plataforma SaaS utilizando
+              Next.js, Fastify e PostgreSQL. Implemento APIs robustas com
+              TypeScript e Drizzle ORM, além de interfaces responsivas com
+              TailwindCSS e Radix UI.
+            </p>
+            <a
+              href="https://www.sabemostecnologia.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+            >
+              Visitar pagina da Sabemos Tecnologia
             </a>
           </motion.div>
         </div>

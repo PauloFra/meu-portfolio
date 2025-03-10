@@ -14,8 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Paulo Sergio - Full Stack Developer",
-  description:
-    "Paulo Sergio, Full Stack Dev: React, Next.js, TypeScript. 3 anos de exp. em soluções web escaláveis.",
+  description: "Paulo Sergio, Full Stack Dev: React, Next.js, TypeScript.",
 };
 
 export default function RootLayout({
