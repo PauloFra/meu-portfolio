@@ -4,22 +4,24 @@ import { motion } from "framer-motion";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
+    nome: "",
     email: "",
-    message: "",
+    mensagem: "",
   });
   const [status, setStatus] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch("/api/contact", {
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${api}api/newsletters`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
+    console.log(res);
     if (res.ok) {
       setStatus("Mensagem enviada com sucesso!");
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ nome: "", email: "", mensagem: "" });
     } else {
       setStatus("Erro ao enviar a mensagem.");
     }
@@ -36,8 +38,8 @@ export default function ContactForm() {
       <input
         type="text"
         placeholder="Nome"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        value={formData.nome}
+        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
         className="w-full p-3 bg-gray-700 dark:bg-gray-300 rounded-md text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         required
       />
@@ -51,8 +53,8 @@ export default function ContactForm() {
       />
       <textarea
         placeholder="Mensagem"
-        value={formData.message}
-        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+        value={formData.mensagem}
+        onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
         className="w-full p-3 bg-gray-700 dark:bg-gray-300 rounded-md text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         rows={5}
         required
