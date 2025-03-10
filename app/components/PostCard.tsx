@@ -15,7 +15,7 @@ export function PostCard({ post, index }: PostCardProps) {
       transition={{ delay: index * 0.1 }}
       className="p-6 bg-gray-800/50 dark:bg-gray-200/50 rounded-lg shadow-md hover:shadow-lg transition-shadow"
     >
-      <a href={post.slug} className="block">
+      <a href={post.slug} target="_blank" className="block">
         <h2 className="text-2xl font-semibold text-white dark:text-gray-900 hover:text-blue-500 dark:hover:text-blue-600 transition-colors">
           {post.title}
         </h2>
