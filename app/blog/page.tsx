@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import { usePosts } from "../hooks/usePosts";
 import { useLanguage } from "../context/LanguageContext";
 import Navbar from "../components/Navbar";
@@ -10,7 +10,6 @@ import { Pagination } from "../components/Pagination";
 import { Loading } from "../components/Loading";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ErrorState } from "../components/ErrorState";
-import { EmptyState } from "../components/EmptyState";
 import { Post } from "../types/global";
 
 export default function Blog() {
@@ -20,7 +19,6 @@ export default function Blog() {
 
   if (loading && page === 1) return <Loading />;
   if (error) return <ErrorState error={error} retry={() => goToPage(1)} />;
-  if (!posts || posts.length === 0) return <EmptyState />;
 
   return (
     <div className="relative min-h-screen">
@@ -43,26 +41,39 @@ export default function Blog() {
           </h1>
           <p className="mt-3 text-muted">
             {t.blog.subtitle}
-            <span className="ml-2 font-mono text-accent">
-              {total} {t.blog.available}
-            </span>
+            {total > 0 && (
+              <span className="ml-2 font-mono text-accent">
+                {total} {t.blog.available}
+              </span>
+            )}
           </p>
         </motion.div>
 
         {loading && page > 1 && <LoadingOverlay />}
 
-        <div className="mt-10 grid gap-5">
-          {posts.map((post: Post, index: number) => (
-            <PostCard key={post.id} post={post} index={index} />
-          ))}
-        </div>
-
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          total={total}
-          goToPage={goToPage}
-        />
+        {posts.length === 0 ? (
+          <div className="mt-16 grid place-items-center rounded-2xl border border-line bg-surface px-6 py-20 text-center">
+            <Sparkles className="h-8 w-8 text-accent" />
+            <h2 className="mt-4 font-display text-2xl font-semibold">
+              {t.blog.soon}
+            </h2>
+            <p className="mt-2 max-w-sm text-muted">{t.blog.soonSub}</p>
+          </div>
+        ) : (
+          <>
+            <div className="mt-10 grid gap-5">
+              {posts.map((post: Post, index: number) => (
+                <PostCard key={post.id} post={post} index={index} />
+              ))}
+            </div>
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              total={total}
+              goToPage={goToPage}
+            />
+          </>
+        )}
 
         <div className="mt-12 text-center">
           <Link

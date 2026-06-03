@@ -179,9 +179,8 @@ export const translations = {
         email: "Email",
         message: "Mensagem",
         send: "Enviar mensagem",
-        sending: "Enviando...",
-        success: "Mensagem enviada com sucesso!",
-        error: "Erro ao enviar a mensagem. Tente novamente.",
+        subject: "Contato pelo portfólio",
+        opening: "Abrindo seu aplicativo de email...",
       },
     },
     footer: {
@@ -202,6 +201,8 @@ export const translations = {
       posts: "posts",
       prev: "Anterior",
       next: "Próxima",
+      soon: "Em breve",
+      soonSub: "Estou preparando conteúdo por aqui. Volte logo!",
     },
     a11y: {
       theme: "Alternar tema",
@@ -377,9 +378,8 @@ export const translations = {
         email: "Email",
         message: "Message",
         send: "Send message",
-        sending: "Sending...",
-        success: "Message sent successfully!",
-        error: "Something went wrong. Please try again.",
+        subject: "Message from your portfolio",
+        opening: "Opening your email app...",
       },
     },
     footer: {
@@ -400,6 +400,8 @@ export const translations = {
       posts: "posts",
       prev: "Previous",
       next: "Next",
+      soon: "Coming soon",
+      soonSub: "I'm cooking up some content here. Check back soon!",
     },
     a11y: {
       theme: "Toggle theme",

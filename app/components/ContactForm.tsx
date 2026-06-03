@@ -2,29 +2,23 @@
 import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
-export default function ContactForm() {
+export default function ContactForm({
+  email = "paulosergiofragamarcos@gmail.com",
+}: {
+  email?: string;
+}) {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({ nome: "", email: "", mensagem: "" });
-  const [sent, setSent] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [opening, setOpening] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const api = process.env.NEXT_PUBLIC_API_URL;
-      const res = await fetch(`${api}api/newsletters`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      setSent(res.ok);
-      if (res.ok) setFormData({ nome: "", email: "", mensagem: "" });
-    } catch {
-      setSent(false);
-    } finally {
-      setLoading(false);
-    }
+    const subject = `${t.contact.form.subject} — ${formData.nome}`;
+    const body = `${formData.mensagem}\n\n— ${formData.nome} (${formData.email})`;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    setOpening(true);
   };
 
   const field =
@@ -61,18 +55,13 @@ export default function ContactForm() {
       />
       <button
         type="submit"
-        disabled={loading}
-        className="w-full rounded-xl bg-accent px-4 py-3 font-medium text-accent-fg transition hover:opacity-90 disabled:opacity-60"
+        className="w-full rounded-xl bg-accent px-4 py-3 font-medium text-accent-fg transition hover:opacity-90"
       >
-        {loading ? t.contact.form.sending : t.contact.form.send}
+        {t.contact.form.send}
       </button>
-      {sent !== null && (
-        <p
-          className={`text-center text-sm ${
-            sent ? "text-accent" : "text-red-400"
-          }`}
-        >
-          {sent ? t.contact.form.success : t.contact.form.error}
+      {opening && (
+        <p className="text-center text-sm text-accent">
+          {t.contact.form.opening}
         </p>
       )}
     </form>

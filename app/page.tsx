@@ -400,7 +400,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <ContactForm />
+            <ContactForm email={EMAIL} />
           </Reveal>
         </div>
       </section>

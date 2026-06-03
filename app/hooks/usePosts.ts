@@ -23,6 +23,10 @@ export function usePosts() {
 
   useEffect(() => {
     const loadPosts = async () => {
+      if (!apiUrl) {
+        setLoading(false);
+        return;
+      }
       setLoading(true);
       try {
         const response = await fetch(
