@@ -44,7 +44,7 @@ export const translations = {
       education: "Formação & certificados",
       educationSub: "Como continuo evoluindo.",
       contact: "Vamos trabalhar juntos",
-      contactSub: "Aberto a freelas, projetos e oportunidades full-time.",
+      contactSub: "Aberto a projetos e oportunidades full-time.",
     },
     experiences: [
       {
@@ -74,22 +74,6 @@ export const translations = {
           "Participação no desenvolvimento de aplicações web com React, TypeScript e Redux, implementando funcionalidades interativas e otimizando a experiência do usuário.\n\n" +
           "Desenvolvimento de um sistema de gerenciamento de candidatos e vagas, com módulo de login, fluxo de matrícula e painel administrativo de status.",
         technologies: ["React", "TypeScript", "Redux", "Styled Components"],
-      },
-      {
-        title: "Desenvolvedor Freelancer",
-        company: "Projetos Autônomos",
-        period: "Janeiro 2022 - Presente",
-        description:
-          "Serviços de manutenção e desenvolvimento web para empresas e pequenos negócios.\n\n" +
-          "Landing pages, blogs, aplicações móveis e plataformas SaaS com Next.js, React Native, Expo, Node.js e Supabase.\n\n" +
-          "Foco em soluções escaláveis e eficientes, da concepção à entrega, atendendo a necessidade de cada cliente.",
-        technologies: [
-          "Next.js",
-          "React Native",
-          "Expo",
-          "Node.js",
-          "Supabase",
-        ],
       },
     ] as Experience[],
     highlights: [
@@ -219,7 +203,7 @@ export const translations = {
       education: "Education & certificates",
       educationSub: "How I keep leveling up.",
       contact: "Let's work together",
-      contactSub: "Open to freelance, projects and full-time roles.",
+      contactSub: "Open to projects and full-time roles.",
     },
     experiences: [
       {
@@ -249,22 +233,6 @@ export const translations = {
           "Took part in building web applications with React, TypeScript and Redux, implementing interactive features and improving the user experience.\n\n" +
           "Built a candidate and job management system with a login module, an enrollment flow and an admin status panel.",
         technologies: ["React", "TypeScript", "Redux", "Styled Components"],
-      },
-      {
-        title: "Freelance Developer",
-        company: "Independent Projects",
-        period: "January 2022 - Present",
-        description:
-          "Web maintenance and development services for companies and small businesses.\n\n" +
-          "Landing pages, blogs, mobile apps and SaaS platforms with Next.js, React Native, Expo, Node.js and Supabase.\n\n" +
-          "Focused on scalable, efficient solutions from concept to delivery, tailored to each client.",
-        technologies: [
-          "Next.js",
-          "React Native",
-          "Expo",
-          "Node.js",
-          "Supabase",
-        ],
       },
     ] as Experience[],
     highlights: [

@@ -91,21 +91,4 @@ export const experiences = [
       "Desenvolvimento de um sistema de gerenciamento de candidatos e vagas, incluindo módulo de login, fluxo de matrícula e painel administrativo para gestão de status dos candidatos.",
     technologies: ["React.js", "TypeScript", "Redux", "Styled Components"],
   },
-  {
-    title: "Desenvolvedor Freelancer",
-    company: "Projetos Autônomos",
-    period: "Janeiro 2022 - Presente",
-    description:
-      "Atuação como desenvolvedor freelancer, oferecendo serviços de manutenção e desenvolvimento web para empresas e pequenos negócios. \n\n" +
-      "Desenvolvimento de landing pages, blogs e aplicações móveis, além de plataformas SaaS utilizando Next.js, React Native, Expo, Node.js e Supabase. \n\n" +
-      "Foco em criar soluções escaláveis e eficientes, desde a concepção até a entrega, atendendo às necessidades específicas de cada cliente.",
-    technologies: [
-      "Next.js",
-      "React Native",
-      "Expo",
-      "Node.js",
-      "Supabase",
-      "TypeScript",
-    ],
-  },
 ];
