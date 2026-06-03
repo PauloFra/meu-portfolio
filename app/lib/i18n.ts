@@ -67,24 +67,6 @@ export const translations = {
         ],
       },
       {
-        title: "Software Engineer (Freelancer)",
-        company: "Sabemos Tecnologia",
-        period: "Janeiro 2023 - Presente",
-        description:
-          "Desenvolvo soluções completas para plataforma SaaS, com arquiteturas escaláveis usando Next.js no frontend e Fastify/Bun no backend, com foco em performance e experiência de usuário.\n\n" +
-          "APIs robustas e seguras com TypeScript, Fastify e Drizzle ORM, autenticação JWT, controle de acesso CASL e PostgreSQL.\n\n" +
-          "Interfaces responsivas com React, TailwindCSS e Radix UI, aplicando React Query e React Hook Form.\n\n" +
-          "Infraestrutura DevOps com Docker, VM Linux e Nginx, garantindo deploy automatizado e alta disponibilidade.",
-        technologies: [
-          "Next.js",
-          "Fastify",
-          "Drizzle ORM",
-          "PostgreSQL",
-          "TailwindCSS",
-          "Radix UI",
-        ],
-      },
-      {
         title: "Desenvolvimento Web",
         company: "DBC Company",
         period: "Fevereiro 2022 - Junho 2022",
@@ -116,12 +98,6 @@ export const translations = {
         body: "Nova plataforma de e-commerce com VTEX IO, ReactJS e NodeJS, com integrações dentro do ecossistema OMNI Channel.",
         href: "https://www.usaflex.com.br/",
         cta: "Visitar a loja",
-      },
-      {
-        name: "Sabemos Tecnologia",
-        body: "Soluções completas para plataforma SaaS com Next.js, Fastify e PostgreSQL — APIs robustas e interfaces responsivas.",
-        href: "https://www.sabemostecnologia.com/",
-        cta: "Visitar o site",
       },
     ],
     education: {
@@ -266,24 +242,6 @@ export const translations = {
         ],
       },
       {
-        title: "Software Engineer (Freelance)",
-        company: "Sabemos Tecnologia",
-        period: "January 2023 - Present",
-        description:
-          "I build end-to-end solutions for a SaaS platform, with scalable architectures using Next.js on the frontend and Fastify/Bun on the backend, focused on performance and UX.\n\n" +
-          "Robust, secure APIs with TypeScript, Fastify and Drizzle ORM, JWT authentication, CASL access control and PostgreSQL.\n\n" +
-          "Responsive interfaces with React, TailwindCSS and Radix UI, applying React Query and React Hook Form.\n\n" +
-          "DevOps infrastructure with Docker, a Linux VM and Nginx, ensuring automated deploys and high availability.",
-        technologies: [
-          "Next.js",
-          "Fastify",
-          "Drizzle ORM",
-          "PostgreSQL",
-          "TailwindCSS",
-          "Radix UI",
-        ],
-      },
-      {
         title: "Web Development",
         company: "DBC Company",
         period: "February 2022 - June 2022",
@@ -315,12 +273,6 @@ export const translations = {
         body: "New e-commerce platform with VTEX IO, ReactJS and NodeJS, with integrations inside the OMNI Channel ecosystem.",
         href: "https://www.usaflex.com.br/",
         cta: "Visit the store",
-      },
-      {
-        name: "Sabemos Tecnologia",
-        body: "End-to-end SaaS solutions with Next.js, Fastify and PostgreSQL — robust APIs and responsive interfaces.",
-        href: "https://www.sabemostecnologia.com/",
-        cta: "Visit the website",
       },
     ],
     education: {
