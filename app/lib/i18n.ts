@@ -48,7 +48,7 @@ export const translations = {
     },
     experiences: [
       {
-        title: "Software Engineer (Pleno)",
+        title: "Software Engineer",
         company: "DBC Company / Usaflex",
         period: "Março 2022 - Presente",
         description:
@@ -130,8 +130,7 @@ export const translations = {
         items: [
           {
             org: "Senac RS",
-            course:
-              "Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)",
+            course: "Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)",
             period: "Fev 2025 - Ago 2027",
           },
           {
@@ -146,8 +145,7 @@ export const translations = {
         items: [
           {
             org: "TargetTrust",
-            course:
-              "Primeiros Passos — Programação e Integração de Sistemas",
+            course: "Primeiros Passos — Programação e Integração de Sistemas",
             period: "Jan 2020 - Jan 2021",
             href: "https://targettrust.com.br/",
             linkLabel: "Conhecer a Target Trust",
@@ -371,8 +369,7 @@ export const translations = {
       },
     },
     contact: {
-      intro:
-        "Feel free to reach out — questions, projects, or just a hello.",
+      intro: "Feel free to reach out — questions, projects, or just a hello.",
       form: {
         name: "Name",
         email: "Email",
