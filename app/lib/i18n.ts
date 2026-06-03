@@ -247,7 +247,7 @@ export const translations = {
     },
     experiences: [
       {
-        title: "Software Engineer (Mid)",
+        title: "Software Engineer",
         company: "DBC Company / Usaflex",
         period: "March 2022 - Present",
         description:
