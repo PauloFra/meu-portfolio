@@ -92,28 +92,6 @@ export const experiences = [
     technologies: ["React.js", "TypeScript", "Redux", "Styled Components"],
   },
   {
-    title: "Software Engineer - Freelancer",
-    company: "Sabemos Tecnologia",
-    period: "Janeiro 2023 - Presente",
-    description:
-      "Desenvolvo soluções completas para plataforma SaaS na Sabemos, implementando arquiteturas escaláveis com Next.js no frontend e Fastify/Bun no backend, garantindo performance e experiência de usuário otimizada.\n\n" +
-      "Construo APIs robustas e seguras utilizando TypeScript, Fastify e Drizzle ORM, implementando autenticação JWT, controle de acesso CASL e integração com PostgreSQL para gerenciamento eficiente de dados.\n\n" +
-      "Desenvolvo interfaces responsivas e intuitivas com React, TailwindCSS e componentes Radix UI, aplicando padrões modernos de desenvolvimento frontend como React Query e React Hook Form para criar experiências de usuário fluidas.\n\n" +
-      "Implemento infraestrutura DevOps com Docker, VM Linux e Nginx, garantindo ambientes de desenvolvimento consistentes, deploy automatizado e alta disponibilidade para aplicações em produção.",
-    technologies: [
-      "React.js",
-      "TypeScript",
-      "Next.js",
-      "Fastify",
-      "Drizzle ORM",
-      "PostgreSQL",
-      "TailwindCSS",
-      "Radix UI",
-      "Docker",
-      "Nginx",
-    ],
-  },
-  {
     title: "Desenvolvedor Freelancer",
     company: "Projetos Autônomos",
     period: "Janeiro 2022 - Presente",
