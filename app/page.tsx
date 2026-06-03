@@ -1,330 +1,422 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  ArrowUpRight,
+  BookOpen,
+  Award,
+  Briefcase,
+} from "lucide-react";
 import Navbar from "./components/Navbar";
 import SkillGrid from "./components/SkillGrid";
 import ContactForm from "./components/ContactForm";
 import Timeline from "./components/Timeline";
-import { skills, experiences } from "./lib/data";
-import { BookOpen, Award, Briefcase } from "lucide-react";
-import Image from "next/image";
+import { skills } from "./lib/data";
+import { useLanguage } from "./context/LanguageContext";
+
+const LINKEDIN = "https://www.linkedin.com/in/paulosfraga";
+const GITHUB = "https://github.com/PauloFra";
+const EMAIL = "paulosergiofragamarcos@gmail.com";
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function Reveal({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay, ease }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function SectionHeading({
+  index,
+  title,
+  sub,
+}: {
+  index: string;
+  title: string;
+  sub?: string;
+}) {
+  return (
+    <Reveal className="mb-10">
+      <span className="font-mono text-xs text-accent">{index}</span>
+      <h2 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        {title}
+      </h2>
+      {sub && <p className="mt-2 text-muted">{sub}</p>}
+    </Reveal>
+  );
+}
+
+const cardClass = "rounded-2xl border border-line bg-surface p-6";
 
 export default function Home() {
-  return (
-    <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">
-      <Navbar />
-      <section className="pt-20 pb-12 px-4 sm:px-8">
-        <div className="max-w-4xl mt-5 mx-auto flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-32 h-32 flex-shrink-0"
-          >
-            <div className="absolute  inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded  blur-sm"></div>
-            <Image
-              src="/images/me.jpg"
-              alt="Paulo Sergio"
-              width={128}
-              height={128}
-              className="relative rounded object-cover border-2 border-blue-600/50 dark:border-blue-500/50 shadow-lg"
-            />
-          </motion.div>
+  const { t } = useLanguage();
 
+  return (
+    <div className="relative min-h-screen overflow-x-hidden">
+      {/* Atmosfera de fundo */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="bg-grid absolute inset-0 opacity-40" />
+        <div className="absolute left-1/2 top-[-10%] h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-accent/10 blur-[140px]" />
+      </div>
+
+      <Navbar />
+
+      {/* HERO */}
+      <section className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-8 sm:pt-36">
+        <div className="grid items-center gap-10 md:grid-cols-5 md:gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 text-center md:text-left"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease }}
+            className="md:col-span-3"
           >
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white dark:text-gray-900 tracking-tight">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-xs text-muted">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              {t.hero.available}
+            </span>
+
+            <h1 className="mt-6 font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
               Paulo Sergio
             </h1>
-            <p className="mt-2 text-xl md:text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent dark:from-blue-600 dark:to-purple-600 font-medium">
-              Desenvolvedor Full-Stack
+            <p className="mt-3 font-mono text-lg text-accent sm:text-xl">
+              {t.hero.role}
             </p>
-            <p className="mt-1 text-base md:text-lg text-gray-400 dark:text-gray-600 italic">
-              Eu me especializo em construir aplicações web escaláveis e
-              eficientes desde o início.
+            <p className="mt-5 max-w-md text-balance text-lg leading-relaxed text-muted">
+              {t.hero.tagline}
             </p>
-            <div className="mt-6">
-              <h2 className="text-xl md:text-2xl font-semibold text-white dark:text-gray-900">
-                Sobre Mim
-              </h2>
-              <p className="mt-2 text-gray-300 dark:text-gray-700 text-base md:text-lg leading-relaxed">
-                Sou um desenvolvedor pleno dedicado a criar aplicações web que
-                combinam funcionalidade e design intuitivo. Especialista em
-                React, Next.js, TypeScript e Node.js, minha trajetória inclui
-                projetos como um sistema inovador de gerenciamento de vagas no
-                meu TCC e soluções de e-commerce na Usaflex com VTEX IO. Sou
-                movido por colaboração, aprendizado contínuo e pela entrega de
-                projetos escaláveis, sempre buscando elevar a experiência do
-                usuário.
-              </p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg transition hover:opacity-90"
+              >
+                <Mail className="h-4 w-4" />
+                {t.hero.ctaContact}
+              </a>
+              <a
+                href="#experience"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm text-fg transition hover:border-accent hover:text-accent"
+              >
+                {t.hero.ctaWork}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <div className="ml-1 flex items-center gap-1">
+                <a
+                  href={GITHUB}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition hover:border-accent hover:text-accent"
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+                <a
+                  href={LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition hover:border-accent hover:text-accent"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted">
+              <li className="inline-flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5 text-accent" />
+                {t.hero.facts.location}
+              </li>
+              <li>{t.hero.facts.focus}</li>
+              <li>{t.hero.facts.current}</li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15, ease }}
+            className="md:col-span-2"
+          >
+            <div className="group relative mx-auto max-w-xs">
+              <div className="absolute -inset-3 -z-10 rounded-3xl border border-accent/30" />
+              <div className="absolute -bottom-3 -right-3 -z-10 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line">
+                <Image
+                  src="/images/paulo.jpg"
+                  alt="Paulo Sergio"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 18rem, 20rem"
+                  className="object-cover object-top grayscale-[15%] transition duration-500 group-hover:grayscale-0"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
-      <section className="px-4 sm:px-8 py-12 dark:bg-gray-200" id="skills">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-6 dark:text-gray-900">
-            Habilidades
-          </h2>
+
+      {/* SOBRE */}
+      <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-8">
+        <SectionHeading index="01" title={t.about.kicker} />
+        <div className="grid gap-8 md:grid-cols-3">
+          <Reveal className="md:col-span-2">
+            <h3 className="font-display text-2xl font-semibold leading-snug text-balance">
+              {t.about.title}
+            </h3>
+            <p className="mt-4 text-lg leading-relaxed text-muted">
+              {t.about.body}
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className={cardClass}>
+              <p className="font-mono text-xs uppercase tracking-wider text-muted">
+                {t.nav.contact}
+              </p>
+              <div className="mt-4 space-y-3 text-sm">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="flex items-center gap-2 text-fg transition hover:text-accent"
+                >
+                  <Mail className="h-4 w-4 text-accent" />
+                  {EMAIL}
+                </a>
+                <a
+                  href={LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-fg transition hover:text-accent"
+                >
+                  <Linkedin className="h-4 w-4 text-accent" />
+                  /in/paulosfraga
+                </a>
+                <a
+                  href={GITHUB}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-fg transition hover:text-accent"
+                >
+                  <Github className="h-4 w-4 text-accent" />
+                  /PauloFra
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* SKILLS */}
+      <section id="skills" className="mx-auto max-w-5xl px-4 py-16 sm:px-8">
+        <SectionHeading
+          index="02"
+          title={t.sections.skills}
+          sub={t.sections.skillsSub}
+        />
+        <Reveal>
           <SkillGrid skills={skills} />
+        </Reveal>
+      </section>
+
+      {/* EXPERIÊNCIA */}
+      <section id="experience" className="mx-auto max-w-5xl px-4 py-16 sm:px-8">
+        <SectionHeading
+          index="03"
+          title={t.sections.experience}
+          sub={t.sections.experienceSub}
+        />
+        <Timeline experiences={t.experiences} />
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {t.highlights.map((item, i) => (
+            <Reveal key={item.name} delay={i * 0.1}>
+              <div className={`${cardClass} flex h-full flex-col`}>
+                <h3 className="font-display text-xl font-semibold">
+                  {item.name}
+                </h3>
+                <p className="mt-2 flex-1 text-muted">{item.body}</p>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-1.5 self-start font-mono text-sm text-accent transition hover:gap-2.5"
+                >
+                  {item.cta}
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <section className="px-4 sm:px-8 py-12 dark:bg-gray-200" id="experience">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-6 dark:text-gray-900">
-            Experiência
-          </h2>
-          <Timeline experiences={experiences} />
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
-          >
-            <h3 className="text-xl font-semibold text-white dark:text-gray-900">
-              Usaflex
-            </h3>
-            <p className="text-gray-300 dark:text-gray-700 mt-2">
-              Developing a new e-commerce platform using VTEX IO, ReactJS and
-              NodeJS. Implementing new features and integrations inside OMNI
-              Channel.
-            </p>
-            <a
-              href="https://www.usaflex.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-            >
-              Visitar Loja Usaflex
-            </a>
-          </motion.div>{" "}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
-          >
-            <h3 className="text-xl font-semibold text-white dark:text-gray-900">
-              Sabemos Tecnologia
-            </h3>
-            <p className="text-gray-300 dark:text-gray-700 mt-2">
-              Desenvolvo soluções completas para plataforma SaaS utilizando
-              Next.js, Fastify e PostgreSQL. Implemento APIs robustas com
-              TypeScript e Drizzle ORM, além de interfaces responsivas com
-              TailwindCSS e Radix UI.
-            </p>
-            <a
-              href="https://www.sabemostecnologia.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-            >
-              Visitar pagina da Sabemos Tecnologia
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="px-4 sm:px-8 py-12 dark:bg-gray-200" id="education">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-6 dark:text-gray-900">
-            Educação
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-500" />
-                <h3 className="text-xl font-semibold text-white dark:text-gray-900">
-                  Formação Acadêmica
+      {/* FORMAÇÃO */}
+      <section id="education" className="mx-auto max-w-5xl px-4 py-16 sm:px-8">
+        <SectionHeading
+          index="04"
+          title={t.sections.education}
+          sub={t.sections.educationSub}
+        />
+        <div className="grid gap-6 md:grid-cols-2">
+          <Reveal>
+            <div className={`${cardClass} h-full`}>
+              <div className="mb-4 flex items-center gap-3">
+                <BookOpen className="h-5 w-5 text-accent" />
+                <h3 className="font-display text-lg font-semibold">
+                  {t.education.academic.title}
                 </h3>
               </div>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-gray-300 dark:text-gray-900 font-medium">
-                    Senac RS
-                  </p>
-                  <p className="text-gray-400 dark:text-gray-700">
-                    Curso Superior de Tecnologia (CST), Análise e
-                    Desenvolvimento de Sistemas (ADS)
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-600 text-sm">
-                    Fev 2025 - Ago 2027
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-300 dark:text-gray-900 font-medium">
-                    Senac RS
-                  </p>
-                  <p className="text-gray-400 dark:text-gray-700">
-                    Técnico, Desenvolvimento de Software
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-600 text-sm">
-                    Fev 2022 - Out 2023
-                  </p>
-                </div>
+              <div className="space-y-5">
+                {t.education.academic.items.map((item) => (
+                  <div key={item.course}>
+                    <p className="font-medium">{item.org}</p>
+                    <p className="text-sm text-muted">{item.course}</p>
+                    <p className="mt-1 font-mono text-xs text-muted/80">
+                      {item.period}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
+          </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="w-6 h-6 text-blue-600 dark:text-blue-500" />
-                <h3 className="text-xl font-semibold text-white dark:text-gray-900">
-                  Licenças e Certificados
+          <Reveal delay={0.1}>
+            <div className={`${cardClass} h-full`}>
+              <div className="mb-4 flex items-center gap-3">
+                <Award className="h-5 w-5 text-accent" />
+                <h3 className="font-display text-lg font-semibold">
+                  {t.education.certs.title}
                 </h3>
               </div>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-gray-300 dark:text-gray-900 font-medium">
-                    TargetTrust
-                  </p>
-                  <p className="text-gray-400 dark:text-gray-700">
-                    Formação Primeiros Passos - Programação e Integração de
-                    Sistemas
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-600 text-sm">
-                    Jan 2020 - Jan 2021
-                  </p>
-                  <a
-                    href="https://targettrust.com.br/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 dark:text-blue-600 hover:underline text-sm"
-                  >
-                    Conhecer a Target Trust
-                  </a>
-                </div>
-                <div>
-                  <p className="text-gray-300 dark:text-gray-900 font-medium">
-                    Udemy
-                  </p>
-                  <p className="text-gray-400 dark:text-gray-700">
-                    Curso de JavaScript e TypeScript do básico ao avançado JS/TS
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-600 text-sm">
-                    Emitido em Fev 2025
-                  </p>
-                  <a
-                    href="https://www.udemy.com/certificate/UC-4bc03b33-bc73-4c89-8be7-b0aa8dfd49d2/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 dark:text-blue-600 hover:underline text-sm"
-                  >
-                    Ver credencial
-                  </a>
-                </div>
+              <div className="space-y-5">
+                {t.education.certs.items.map((item) => (
+                  <div key={item.course}>
+                    <p className="font-medium">{item.org}</p>
+                    <p className="text-sm text-muted">{item.course}</p>
+                    <p className="mt-1 font-mono text-xs text-muted/80">
+                      {item.period}
+                    </p>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-block text-sm text-accent hover:underline"
+                    >
+                      {item.linkLabel}
+                    </a>
+                  </div>
+                ))}
               </div>
-            </motion.div>
+            </div>
+          </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="md:col-span-2 p-6 bg-gradient-to-br from-gray-800/70 to-gray-900/70 dark:from-gray-200/70 dark:to-gray-300/70 rounded-xl shadow-lg border border-gray-700 dark:border-gray-400"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-500" />
-                <h3 className="text-xl font-semibold text-white dark:text-gray-900">
-                  Programa Vem Ser | DBC Company
+          <Reveal delay={0.15} className="md:col-span-2">
+            <div className={cardClass}>
+              <div className="mb-4 flex items-center gap-3">
+                <Briefcase className="h-5 w-5 text-accent" />
+                <h3 className="font-display text-lg font-semibold">
+                  {t.education.vemSer.title}
                 </h3>
               </div>
-              <p className="text-gray-300 dark:text-gray-700">
-                Durante meu estágio na DBC Company, participei da criação de
-                aplicações web utilizando{" "}
-                <span className="font-medium">React, TypeScript e Redux</span>.
-                Fui responsável por implementar funcionalidades interativas e
-                otimizar a experiência do usuário, além de aprimorar a
-                performance das aplicações.
-              </p>
-              <p className="text-gray-300 dark:text-gray-700 mt-2">
-                No meu Projeto de TCC, desenvolvi um sistema de gerenciamento de
-                candidatos e vagas, que inclui um módulo de login para
-                autenticação de usuários, um processo para que os candidatos se
-                matriculassem nas vagas disponíveis e um painel de administração
-                que permite aos administradores alterar o status dos candidatos
-                em cada vaga. O sistema foi projetado para proporcionar uma
-                gestão eficiente e fluida de vagas e candidatos.
-              </p>
-              <p className="text-gray-300 dark:text-gray-700 mt-2">
-                Esse projeto me permitiu aprimorar minhas habilidades em React e
-                Redux, além de ganhar experiência em TypeScript, garantindo
-                maior segurança e escalabilidade na aplicação.
-              </p>
+              <div className="space-y-3 text-muted">
+                {t.education.vemSer.body.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
               <a
-                href="https://www.dbccompany.com.br/vem-ser/"
+                href={t.education.vemSer.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-line px-4 py-2 text-sm transition hover:border-accent hover:text-accent"
               >
-                Saiba mais sobre o Vem Ser
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="px-4 sm:px-8 py-12 bg-gray-800/50 dark:bg-gray-300/50"
-        id="contact"
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-6 dark:text-gray-900">
-            Contato
-          </h2>
-          <ContactForm />
-          <div className="mt-12 text-center">
-            <p className="mt-2 text-gray-300 dark:text-gray-700">
-              Sinta-se à vontade para me contatar para qualquer dúvida ou
-              oportunidade de colaboração.
-            </p>
-            <div className="mt-6 flex justify-center gap-6">
-              <a
-                href="https://www.linkedin.com/in/paulo-sergio-fraga-marcos-56b247227/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-500 dark:to-blue-300 text-white rounded shadow-lg hover:from-blue-700 hover:to-blue-500 dark:hover:from-blue-600 dark:hover:to-blue-400 transition-all duration-300"
-              >
-                <Image
-                  src="/images/linkedin.svg"
-                  alt="LinkedIn"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href="https://github.com/PauloFra"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-600 dark:to-gray-400 text-white rounded shadow-lg hover:from-gray-800 hover:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 transition-all duration-300"
-              >
-                <Image
-                  src="/images/github.svg"
-                  alt="GitHub"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-                <span>GitHub</span>
+                {t.education.vemSer.cta}
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
+
+      {/* CONTATO */}
+      <section id="contact" className="mx-auto max-w-5xl px-4 py-16 sm:px-8">
+        <SectionHeading
+          index="05"
+          title={t.sections.contact}
+          sub={t.sections.contactSub}
+        />
+        <div className="grid gap-10 md:grid-cols-2 md:items-start">
+          <Reveal>
+            <p className="text-lg leading-relaxed text-muted">
+              {t.contact.intro}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition hover:border-accent hover:text-accent"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a
+                href={GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition hover:border-accent hover:text-accent"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition hover:border-accent hover:text-accent"
+              >
+                <Mail className="h-4 w-4" />
+                Email
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ContactForm />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-line">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-8">
+          <p className="font-mono text-sm text-fg">
+            paulo<span className="text-accent">.</span>dev
+          </p>
+          <p className="text-center text-xs text-muted">{t.footer.built}</p>
+          <p className="font-mono text-xs text-muted">
+            © {new Date().getFullYear()} Paulo Sergio
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

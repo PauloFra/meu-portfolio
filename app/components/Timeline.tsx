@@ -1,12 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-
-type Experience = {
-  title: string;
-  company: string;
-  period: string;
-  description: string;
-};
+import type { Experience } from "../lib/i18n";
 
 export default function Timeline({
   experiences,
@@ -14,25 +8,35 @@ export default function Timeline({
   experiences: Experience[];
 }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {experiences.map((exp, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.2 }}
-          className="relative pl-8 before:absolute before:left-0 before:top-2 before:w-4 before:h-4 before:bg-blue-600 dark:before:bg-blue-500 before:rounded-full before:border-4 before:border-gray-900 dark:before:border-gray-100"
+        <motion.article
+          key={`${exp.company}-${exp.title}`}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: index * 0.08 }}
+          className="rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent/50"
         >
-          <h3 className="text-xl font-semibold text-white dark:text-gray-900">
+          <p className="font-mono text-xs text-accent">{exp.period}</p>
+          <h3 className="mt-2 font-display text-xl font-semibold">
             {exp.title}
           </h3>
-          <p className="text-gray-400 dark:text-gray-600">
-            {exp.company} | {exp.period}
-          </p>
-          <p className="text-gray-300 dark:text-gray-700 mt-2">
+          <p className="text-sm text-muted">{exp.company}</p>
+          <p className="mt-3 whitespace-pre-line leading-relaxed text-muted">
             {exp.description}
           </p>
-        </motion.div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {exp.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-line bg-surface-2 px-2.5 py-1 font-mono text-xs text-muted"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </motion.article>
       ))}
     </div>
   );

@@ -1,11 +1,11 @@
+"use client";
+import { useLanguage } from "../context/LanguageContext";
+
 export function EmptyState() {
+  const { t } = useLanguage();
   return (
-    <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 bg-clip-text text-transparent">
-          Nenhum post encontrado
-        </h1>
-      </div>
+    <div className="grid min-h-screen place-items-center bg-bg p-8 text-fg">
+      <h1 className="font-display text-2xl font-semibold">{t.blog.empty}</h1>
     </div>
   );
 }

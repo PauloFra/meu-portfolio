@@ -1,11 +1,11 @@
 export function LoadingOverlay() {
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse delay-150"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse delay-300"></div>
+    <div className="fixed inset-0 z-50 grid place-items-center bg-bg/60 backdrop-blur-sm">
+      <div className="rounded-2xl border border-line bg-surface p-4">
+        <div className="flex gap-2">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent delay-150" />
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent delay-300" />
         </div>
       </div>
     </div>

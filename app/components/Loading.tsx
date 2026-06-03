@@ -1,14 +1,18 @@
+"use client";
+import { useLanguage } from "../context/LanguageContext";
+
 export function Loading() {
+  const { t } = useLanguage();
   return (
-    <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 bg-clip-text text-transparent">
-          Carregando posts...
+    <div className="grid min-h-screen place-items-center bg-bg p-8 text-fg">
+      <div className="text-center">
+        <h1 className="font-display text-2xl font-semibold">
+          {t.blog.loading}
         </h1>
-        <div className="flex space-x-2 justify-center">
-          <div className="w-4 h-4 rounded-full bg-blue-500 animate-pulse"></div>
-          <div className="w-4 h-4 rounded-full bg-blue-500 animate-pulse delay-150"></div>
-          <div className="w-4 h-4 rounded-full bg-blue-500 animate-pulse delay-300"></div>
+        <div className="mt-6 flex justify-center gap-2">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-accent" />
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-accent delay-150" />
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-accent delay-300" />
         </div>
       </div>
     </div>

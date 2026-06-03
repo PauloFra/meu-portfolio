@@ -1,7 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { usePosts } from "../hooks/usePosts";
+import { useLanguage } from "../context/LanguageContext";
+import Navbar from "../components/Navbar";
 import { PostCard } from "../components/PostCard";
 import { Pagination } from "../components/Pagination";
 import { Loading } from "../components/Loading";
@@ -13,38 +16,45 @@ import { Post } from "../types/global";
 export default function Blog() {
   const { posts, loading, error, page, totalPages, total, goToPage } =
     usePosts();
+  const { t } = useLanguage();
 
   if (loading && page === 1) return <Loading />;
   if (error) return <ErrorState error={error} retry={() => goToPage(1)} />;
   if (!posts || posts.length === 0) return <EmptyState />;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 p-8">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto"
-      >
-        <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 bg-clip-text text-transparent">
-          Blog
-        </h1>
-        <p className="text-gray-300 dark:text-gray-700 mb-8">
-          Meu espaço para compartilhar conhecimento e experiências.
-          <span className="text-blue-400 dark:text-blue-600 ml-2">
-            {total} posts disponíveis
-          </span>
-        </p>
+    <div className="relative min-h-screen">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="bg-grid absolute inset-0 opacity-40" />
+        <div className="absolute left-1/2 top-[-10%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/10 blur-[140px]" />
+      </div>
 
-        {/* Loading overlay para mudança de página */}
+      <Navbar />
+
+      <main className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-8 sm:pt-32">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="font-mono text-xs text-accent">/blog</span>
+          <h1 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            {t.blog.title}
+          </h1>
+          <p className="mt-3 text-muted">
+            {t.blog.subtitle}
+            <span className="ml-2 font-mono text-accent">
+              {total} {t.blog.available}
+            </span>
+          </p>
+        </motion.div>
+
         {loading && page > 1 && <LoadingOverlay />}
 
-        {/* Lista de posts */}
-        <div className="grid gap-6">
-          {Array.isArray(posts) &&
-            posts.map((post: Post, index: number) => (
-              <PostCard key={post.id} post={post} index={index} />
-            ))}
+        <div className="mt-10 grid gap-5">
+          {posts.map((post: Post, index: number) => (
+            <PostCard key={post.id} post={post} index={index} />
+          ))}
         </div>
 
         <Pagination
@@ -54,20 +64,16 @@ export default function Blog() {
           goToPage={goToPage}
         />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-8 text-center"
-        >
+        <div className="mt-12 text-center">
           <Link
             href="/"
-            className="inline-block px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent"
           >
-            ← Voltar para Home
+            <ArrowLeft className="h-4 w-4" />
+            {t.blog.back}
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </main>
     </div>
   );
 }

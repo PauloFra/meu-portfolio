@@ -1,81 +1,80 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    mensagem: "",
-  });
-  const [status, setStatus] = useState("");
+  const { t } = useLanguage();
+  const [formData, setFormData] = useState({ nome: "", email: "", mensagem: "" });
+  const [sent, setSent] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const api = process.env.NEXT_PUBLIC_API_URL;
-    const res = await fetch(`${api}api/newsletters`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    console.log(res);
-    if (res.ok) {
-      setStatus("Mensagem enviada com sucesso!");
-      setFormData({ nome: "", email: "", mensagem: "" });
-    } else {
-      setStatus("Erro ao enviar a mensagem.");
+    setLoading(true);
+    try {
+      const api = process.env.NEXT_PUBLIC_API_URL;
+      const res = await fetch(`${api}api/newsletters`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      setSent(res.ok);
+      if (res.ok) setFormData({ nome: "", email: "", mensagem: "" });
+    } catch {
+      setSent(false);
+    } finally {
+      setLoading(false);
     }
   };
 
+  const field =
+    "w-full rounded-xl border border-line bg-surface px-4 py-3 text-fg placeholder-muted/70 transition-colors focus:border-accent focus:outline-none";
+
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto space-y-4 p-6 bg-gray-800/50 dark:bg-gray-200/50 rounded-lg shadow-lg"
+      className="space-y-4 rounded-2xl border border-line bg-surface p-6"
     >
       <input
         type="text"
-        placeholder="Nome"
+        placeholder={t.contact.form.name}
         value={formData.nome}
         onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-        className="w-full p-3 bg-gray-700 dark:bg-gray-300 rounded-md text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={field}
         required
       />
       <input
         type="email"
-        placeholder="Email"
+        placeholder={t.contact.form.email}
         value={formData.email}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        className="w-full p-3 bg-gray-700 dark:bg-gray-300 rounded-md text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={field}
         required
       />
       <textarea
-        placeholder="Mensagem"
+        placeholder={t.contact.form.message}
         value={formData.mensagem}
         onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-        className="w-full p-3 bg-gray-700 dark:bg-gray-300 rounded-md text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={`${field} resize-none`}
         rows={5}
         required
       />
       <button
         type="submit"
-        className="w-full p-3 bg-blue-600 dark:bg-blue-500 rounded-md text-white font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+        disabled={loading}
+        className="w-full rounded-xl bg-accent px-4 py-3 font-medium text-accent-fg transition hover:opacity-90 disabled:opacity-60"
       >
-        Enviar
+        {loading ? t.contact.form.sending : t.contact.form.send}
       </button>
-      {status && (
+      {sent !== null && (
         <p
-          className={`text-center ${
-            status.includes("sucesso")
-              ? "text-green-400 dark:text-green-600"
-              : "text-red-400 dark:text-red-600"
+          className={`text-center text-sm ${
+            sent ? "text-accent" : "text-red-400"
           }`}
         >
-          {status}
+          {sent ? t.contact.form.success : t.contact.form.error}
         </p>
       )}
-    </motion.form>
+    </form>
   );
 }

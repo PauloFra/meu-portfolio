@@ -47,3 +47,5 @@ next-env.d.ts
 
 app/lib/data.ts
 .vercel
+
+.vercel
