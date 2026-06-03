@@ -161,7 +161,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.15, ease }}
             className="md:col-span-2"
           >
-            <div className="group relative mx-auto max-w-xs">
+            <div className="group relative mx-auto max-w-sm">
               <div className="absolute -inset-3 -z-10 rounded-3xl border border-accent/30" />
               <div className="absolute -bottom-3 -right-3 -z-10 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
               <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line">
@@ -170,7 +170,8 @@ export default function Home() {
                   alt="Paulo Sergio"
                   fill
                   priority
-                  sizes="(max-width: 768px) 18rem, 20rem"
+                  quality={90}
+                  sizes="(max-width: 768px) 90vw, 24rem"
                   className="object-cover object-top grayscale-[15%] transition duration-500 group-hover:grayscale-0"
                 />
               </div>
